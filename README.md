@@ -4,7 +4,7 @@ A drop-down Claude Code window for Windows. Press **Ctrl+Alt+C** anywhere and th
 
 [Русская версия](README.ru.md)
 
-<!-- Add a demo GIF here: docs/demo.gif -->
+![Illustration: the Claude Code window above the taskbar](docs/illustration.svg)
 
 ## Features
 

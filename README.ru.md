@@ -4,7 +4,7 @@
 
 [English version](README.md)
 
-<!-- Сюда гифку: docs/demo.gif -->
+![Иллюстрация: окно Claude Code над панелью задач](docs/illustration.svg)
 
 ## Возможности
 
