@@ -6,7 +6,7 @@ A drop-down Claude Code window for Windows. Press **Ctrl+Alt+C** anywhere and th
 
 ![Illustration: the Claude Code window above the taskbar](docs/illustration.svg)
 
-**Install:** download the repository and double-click `install.cmd`. That's it.
+**[Download ClaudeCodeTray-Setup.zip](https://github.com/oozzzyy/claude-code-tray/releases/latest/download/ClaudeCodeTray-Setup.zip)**, unpack it and double-click `install.cmd`. That's it.
 
 ## Features
 
@@ -24,7 +24,7 @@ A drop-down Claude Code window for Windows. Press **Ctrl+Alt+C** anywhere and th
 
 ## Install
 
-Download the repository and double-click **install.cmd**. It's safe to run again. Setup:
+[Download the setup archive](https://github.com/oozzzyy/claude-code-tray/releases/latest/download/ClaudeCodeTray-Setup.zip), unpack it and double-click **install.cmd**. It's safe to run again. Setup:
 
 1. Checks for Claude Code and Windows Terminal, and installs the terminal with winget if needed.
 2. Builds the tray with the C# compiler included in Windows and puts it in `%LOCALAPPDATA%\ClaudeCodeTray`.

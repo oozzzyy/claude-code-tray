@@ -6,7 +6,7 @@
 
 ![Иллюстрация: окно Claude Code над панелью задач](docs/illustration.svg)
 
-**Установка:** скачай репозиторий и дважды нажми на `install.cmd`. Больше ничего не нужно.
+**[Скачай ClaudeCodeTray-Setup.zip](https://github.com/oozzzyy/claude-code-tray/releases/latest/download/ClaudeCodeTray-Setup.zip)**, распакуй и дважды нажми на `install.cmd`. Больше ничего не нужно.
 
 ## Возможности
 
@@ -24,7 +24,7 @@
 
 ## Установка
 
-Скачай репозиторий и дважды нажми на **install.cmd**. Запускать повторно безопасно. Установщик:
+[Скачай архив](https://github.com/oozzzyy/claude-code-tray/releases/latest/download/ClaudeCodeTray-Setup.zip), распакуй его и дважды нажми на **install.cmd**. Запускать повторно безопасно. Установщик:
 
 1. Проверяет Claude Code и Windows Terminal, а терминал при необходимости ставит через winget.
 2. Собирает трей компилятором C#, который уже есть в Windows, и кладёт его в `%LOCALAPPDATA%\ClaudeCodeTray`.
