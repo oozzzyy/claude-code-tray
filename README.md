@@ -6,6 +6,8 @@ A drop-down Claude Code window for Windows. Press **Ctrl+Alt+C** anywhere and th
 
 ![Illustration: the Claude Code window above the taskbar](docs/illustration.svg)
 
+**Install:** download the repository and double-click `install.cmd`. That's it.
+
 ## Features
 
 - **Toggle window:** Ctrl+Alt+C or a click on the tray icon.
@@ -17,24 +19,26 @@ A drop-down Claude Code window for Windows. Press **Ctrl+Alt+C** anywhere and th
 ## Requirements
 
 - Windows 11 (the only version tested)
-- [Windows Terminal](https://aka.ms/terminal)
-- Claude Code installed at `%USERPROFILE%\.local\bin\claude.exe` (the native installer's location)
+- [Windows Terminal](https://aka.ms/terminal) (setup installs it if missing)
+- Claude Code, from the native installer or on your PATH
 
-## Build and run
+## Install
 
-```powershell
-.\build.ps1
-.\ClaudeTray.exe
-```
+Download the repository and double-click **install.cmd**. It's safe to run again. Setup:
 
-The script uses the C# compiler included in Windows, so nothing else needs installing. To start the tray at logon, right-click its icon and choose **Start with Windows**.
+1. Checks for Claude Code and Windows Terminal, and installs the terminal with winget if needed.
+2. Builds the tray with the C# compiler included in Windows and puts it in `%LOCALAPPDATA%\ClaudeCodeTray`.
+3. Copies the sounds to `~/.claude/sounds`, keeping any files already there.
+4. Adds hooks to `~/.claude/settings.json`, keeping your other settings. The original is saved once as `settings.json.before-tray`.
+5. Turns on autostart and starts the tray.
+
+Restart open Claude Code sessions to turn on the sounds.
+
+To remove the tray, its autostart and its hooks, run `install.cmd -Uninstall`. The sound files stay.
 
 ## Reminder sounds
 
-1. Merge `hooks.example.json` into `~/.claude/settings.json` and set the path to `ClaudeTray.exe`.
-2. Put `coin-quiet.wav` (response finished) and `notify-quiet.wav` (Claude needs you) in `~/.claude/sounds`.
-
-The tray repeats the sound once a minute, up to 30 times, until you open the window.
+A sound plays when a response finishes (`coin-quiet.wav`) and when Claude needs you (`notify-quiet.wav`). If the window stays hidden, the tray repeats it once a minute, up to 30 times.
 
 ## Good to know
 

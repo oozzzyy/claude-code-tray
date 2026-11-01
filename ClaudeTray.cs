@@ -518,8 +518,7 @@ sealed class App : ApplicationContext
     readonly SoundReminder reminder;
     readonly List<Icon> frames;
     readonly ToolStripMenuItem autostartItem;
-    readonly string claudePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @".local\bin\claude.exe");
+    readonly string claudePath = FindClaude();
     IntPtr target = IntPtr.Zero;
     IntPtr previous = IntPtr.Zero;
     int trayFrame;
@@ -677,6 +676,29 @@ sealed class App : ApplicationContext
         Native.keybd_event(Native.VK_H, 0, 0, UIntPtr.Zero);
         Native.keybd_event(Native.VK_H, 0, Native.KEYEVENTF_KEYUP, UIntPtr.Zero);
         Native.keybd_event(Native.VK_LWIN, 0, Native.KEYEVENTF_KEYUP, UIntPtr.Zero);
+    }
+
+    // The native installer's location comes first, then anything on PATH, such as an npm install.
+    static string FindClaude()
+    {
+        string native = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @".local\bin\claude.exe");
+        if (File.Exists(native)) return native;
+        string pathVar = Environment.GetEnvironmentVariable("PATH") ?? "";
+        foreach (string dir in pathVar.Split(';'))
+        {
+            if (dir.Trim().Length == 0) continue;
+            foreach (string name in new[] { "claude.exe", "claude.cmd" })
+            {
+                try
+                {
+                    string candidate = Path.Combine(dir.Trim(), name);
+                    if (File.Exists(candidate)) return candidate;
+                }
+                catch (ArgumentException) { } // A malformed PATH entry.
+            }
+        }
+        return native;
     }
 
     static string WorkDir() { return Environment.GetFolderPath(Environment.SpecialFolder.UserProfile); }
