@@ -91,6 +91,28 @@ function Stop-InstalledTray {
     $running | ForEach-Object { $_.WaitForExit(5000) | Out-Null }
 }
 
+# Only one tray can run, so a copy from another folder would keep the new one from starting.
+function Stop-OtherTrays {
+    $running = @(Get-Process ClaudeTray -ErrorAction SilentlyContinue)
+    $running | Stop-Process -Force
+    $running | ForEach-Object { $_.WaitForExit(5000) | Out-Null }
+}
+
+# Points hooks left by a tray in another folder at this one.
+function Update-TrayHooks($settings) {
+    if (-not $settings.PSObject.Properties['hooks']) { return }
+    foreach ($prop in @($settings.hooks.PSObject.Properties)) {
+        foreach ($group in @($prop.Value)) {
+            foreach ($hook in @($group.hooks)) {
+                if ($hook.command -and $hook.command -ne $exe -and $hook.command -like '*\ClaudeTray.exe') {
+                    Step "Hook moved from $($hook.command)"
+                    $hook.command = $exe
+                }
+            }
+        }
+    }
+}
+
 function Find-Claude {
     $native = Join-Path $HOME '.local\bin\claude.exe'
     if (Test-Path -LiteralPath $native) { return $native }
@@ -133,6 +155,7 @@ function Install-Tray {
     }
     Step "Sounds: $soundsDir"
 
+    Update-TrayHooks $settings
     Add-HookGroup $settings 'Stop' ([pscustomobject]@{ hooks = @(Sound-Hook 'coin-quiet.wav') }) 'coin-quiet.wav'
     Add-HookGroup $settings 'Stop' ([pscustomobject]@{ hooks = @(Signal-Hook 'done') }) 'ClaudeTray.exe'
     Add-HookGroup $settings 'Notification' ([pscustomobject]@{ hooks = @(Sound-Hook 'notify-quiet.wav') }) 'notify-quiet.wav'
@@ -147,6 +170,7 @@ function Install-Tray {
     }
 
     if (-not $NoStart) {
+        Stop-OtherTrays
         Start-Process -FilePath $exe
         Step 'Tray: started'
     }

@@ -29,8 +29,8 @@ A drop-down Claude Code window for Windows. Press **Ctrl+Alt+C** anywhere and th
 1. Checks for Claude Code and Windows Terminal, and installs the terminal with winget if needed.
 2. Builds the tray with the C# compiler included in Windows and puts it in `%LOCALAPPDATA%\ClaudeCodeTray`.
 3. Copies the sounds to `~/.claude/sounds`, keeping any files already there.
-4. Adds hooks to `~/.claude/settings.json`, keeping your other settings. The original is saved once as `settings.json.before-tray`.
-5. Turns on autostart and starts the tray.
+4. Adds hooks to `~/.claude/settings.json`, keeping your other settings. The original is saved once as `settings.json.before-tray`. Hooks from a tray in another folder are moved to this one.
+5. Turns on autostart and starts the tray. A tray already running from another folder is closed first, and its files stay.
 
 Restart open Claude Code sessions to turn on the sounds.
 
