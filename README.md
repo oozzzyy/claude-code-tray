@@ -4,7 +4,7 @@ A drop-down Claude Code window for Windows. Press **Ctrl+Alt+C** anywhere and th
 
 [Русская версия](README.ru.md)
 
-![Illustration: the Claude Code window above the taskbar](docs/illustration.svg)
+![Pressing Ctrl+Alt+C opens the Claude Code window, pressing it again hides it](docs/demo.gif)
 
 **[Download ClaudeCodeTray-Setup.zip](https://github.com/oozzzyy/claude-code-tray/releases/latest/download/ClaudeCodeTray-Setup.zip)**, unpack it and double-click `install.cmd`. That's it.
 

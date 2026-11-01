@@ -4,7 +4,7 @@
 
 [English version](README.md)
 
-![Иллюстрация: окно Claude Code над панелью задач](docs/illustration.svg)
+![Ctrl+Alt+C открывает окно Claude Code, повторное нажатие прячет его](docs/demo.gif)
 
 **[Скачай ClaudeCodeTray-Setup.zip](https://github.com/oozzzyy/claude-code-tray/releases/latest/download/ClaudeCodeTray-Setup.zip)**, распакуй и дважды нажми на `install.cmd`. Больше ничего не нужно.
 
